@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Test of iframe-to-parent communication</title>
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+
+				$('#sendMessageToIframe').click(function(){
+					$('#iframe').get(0).contentWindow.postMessage('Hello child!', '*');
+				});
+
+				$(window).on('message', function(e){
+					alert('index.html: Message received from inner.html:\n\n' + e.originalEvent.data);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<p>This is the parent frame</p>
+		<button id="sendMessageToIframe" type="button">Send message to iframe</button>
+		<iframe id="iframe" src="inner.html" width="100%" height="500" style="margin: 10px"></iframe>
+	</body>
+</html>

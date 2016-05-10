@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				$('#sendMessage').click(function(){
+					parent.postMessage('Hello parent!', '*');
+				});
+
+				$(window).on('message', function(e){
+					alert('inner.html: Message received from parent:\n\n' + e.originalEvent.data);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<p>This is the inner frame</p>
+		<button id="sendMessage" type="button">Send message to parent</button>
+	</body>
+</html>
